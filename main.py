@@ -7,6 +7,9 @@ from dotenv import find_dotenv, load_dotenv
 from google_sheet import Icont_sheet
 from letters import panda_letter
 
+ICONT_REF = ''
+BOOKING = ''
+TRUCK_NUMBER =''
 CONT = ''
 SEAL = ''
 
@@ -41,59 +44,69 @@ def home():
 def not_good():
     return render_template("not_good.html"), {"Refresh": "8; url='https://panda-lejelentes.onrender.com'"}
 
-
-
+@app.route('/email_sent')
+def success():
+    return render_template("lejelentes.html",icont_ref=ICONT_REF, booking=BOOKING, cont=CONT, seal=SEAL,
+                truck_number=TRUCK_NUMBER)
 
 @app.route("/email_sent", methods=["POST"])
 def receive_data():
+    global ICONT_REF
+    global BOOKING
     global CONT
     global SEAL
+    global TRUCK_NUMBER
 
-    booking = (request.form['booking'])
-    icont_ref = (request.form['icont_ref'])
+
+    BOOKING = (request.form['booking'])
+    ICONT_REF = (request.form['icont_ref'])
     CONT = ((request.form['cont']).upper().replace(' ', ''))
     SEAL = ((request.form['seal']))
-    truck_number = (request.form['rendszam']).upper().replace(' ', '/')
+    TRUCK_NUMBER = (request.form['rendszam']).upper().replace(' ', '/')
     # button = ((request.form['button']))
     # print(f"BUTTOOOMNNN.: {button}")
-    print(f"Icont ref.: {icont_ref}")
-    print(f"Booking: {booking}")
+    print(f"Icont ref.: {ICONT_REF}")
+    print(f"Booking: {BOOKING}")
     print(f"Konténer: {CONT}")
     print(f"Zár: {SEAL}")
-    print(f"Rendszám: {truck_number}\n")
+    print(f"Rendszám: {TRUCK_NUMBER}\n")
 
 
-    if googlesheet_kitoltes(icont_ref, booking, CONT, SEAL, truck_number) == False:
+    if googlesheet_kitoltes(ICONT_REF, BOOKING, CONT, SEAL, TRUCK_NUMBER) == False:
         return redirect(url_for('not_good'))
+    else:
+        # msg = Message(subject=f"booking: {booking} / {CONT}",
+        #               recipients=os.getenv('RECIPIENTS'),
+        #               cc=os.getenv('CC')
+        #               )
 
+        recipients_str = os.getenv('RECIPIENTS')
+        print(recipients_str)
+        recipients_list = recipients_str.split(',')
+        print(recipients_list)
+        cc_list = os.getenv('CC').split(',')
 
-    # msg = Message(subject=f"booking: {booking} / {CONT}",
-    #               recipients=os.getenv('RECIPIENTS'),
-    #               cc=os.getenv('CC')
-    #               )
+        msg = Message(subject=f"booking: {BOOKING} / {CONT}",
+                      recipients=recipients_list,
+                      cc=cc_list
+                      )
 
-    recipients_str = os.getenv('RECIPIENTS')
-    print(recipients_str)
-    recipients_list = recipients_str.split(',')
-    print(recipients_list)
-    cc_list = os.getenv('CC').split(',')
+        #cdsg = Message(f"booking: {booking} / {cont}", recipients=['kele.tomka@gmail.com'])
 
-    msg = Message(subject=f"booking: {booking} / {CONT}",
-                  recipients=recipients_list,
-                  cc=cc_list
-                  )
+        #msg.body = "Kerlek jelentsetek le Bilken az alabbi kontenert:"
+        #<h5 style=”font-family: ’Calibri’; font-size:11; color:black;”>
+        msg.html = panda_letter(CONT,SEAL)
 
-    #cdsg = Message(f"booking: {booking} / {cont}", recipients=['kele.tomka@gmail.com'])
+        mail.send(msg)
 
-    #msg.body = "Kerlek jelentsetek le Bilken az alabbi kontenert:"
-    #<h5 style=”font-family: ’Calibri’; font-size:11; color:black;”>
-    msg.html = panda_letter(CONT,SEAL)
-
-    mail.send(msg)
-
-    return render_template('lejelentes.html', icont_ref=icont_ref, booking=booking, cont=CONT, seal=SEAL, truck_number=truck_number)
+        return redirect(url_for('success'))
 
 def googlesheet_kitoltes(icont_ref, booking, cont,seal, truck_number):
+    icont_ref = ICONT_REF
+    booking = BOOKING
+    cont = CONT
+    truck_number = TRUCK_NUMBER
+
     googletabla = Icont_sheet()
     googlesheet = "https://docs.google.com/spreadsheets/d/1mQN5woJVHJrqf49D4TlEwQGtDx8PsnqKiLa6B_3Fd4g/edit#gid=0"
     worksheet = "Munkalap1"
@@ -132,9 +145,5 @@ def googlesheet_kitoltes(icont_ref, booking, cont,seal, truck_number):
 
     #email(booking, container, seal)
 
-def email(booking, cont, seal):
-    msg = Message("Hello", recipients=['sivokiw143@undewp.com'])
-    mail.send(msg)
-
 if __name__ == "__main__":
-    app.run()
+    app.run(port=5005)
