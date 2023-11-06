@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>PANDA lejelentés</title>
+  <link rel="stylesheet" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+  <link rel="icon" href="../static/assets/ICONT icon 2.ico">
+  <link rel="stylesheet" href="../static/css/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+</head>
+
+<body>
+  <div id="loading"></div>
+  <div class="fullscreen content">
+    <video loop autoplay muted>
+      <source src="../static/assets/Ship video 2.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+    <div class="content">
+      <div class="container"><br>
+        <center>
+          <h2>Panda rakott konténer lejelentés</h2>
+        </center>
+      </div>
+      <div class="container"><br>
+        <div class="row align-items-center justify-content-center">
+          <div class="col-6 col-sm-6 col-md-6">
+            <form action="/email_sent" method="post" role="form">
+              <div class="form-group">
+                <label for="name">I-CONT Ref.</label>
+                <input type="text" maxlength="9" class="form-control" id="icont_ref" name="icont_ref"
+                  pattern="[0-9\-]{1,9}" title="Csak számok és '-' lehet benne" required placeholder="pl: 898123-1">
+                <br>
+                <label for="name">Booking</label>
+                <input type="text" maxlength="10" class="form-control" id="booking" name="booking" pattern="[0                                                -9]{10}"
+                  title="10 számjegy" required placeholder="pl: 6368293800">
+                <br>
+                <label for="cont">Konténer:</label>
+                <input type="text" maxlength="12" class="form-control" id="cont" name="cont"
+                  pattern="[A-Za-z]{4} [0-9]{7}" title="4 betű szóköz 7 számjegy" required
+                  placeholder="pl: temu 1234567">
+                <br>
+                <label for="zar">Zár:</label>
+                <input type="text" maxlength="13" class="form-control" id="zar" name="seal" required
+                  placeholder="Zárszám">
+                <br>
+                <label for="rendszam">Rendszám:</label>
+                <input type="text" maxlength="19" class="form-control" id="rendszam" name="rendszam"
+                  pattern="[A-Za-z0-9\-]{7,9} [A-Za-z0-9\-]{7,9}"
+                  title="Csak betü, '-' és számokat tartalmazhat. ' ' szóközzel legyen elválasztva a vontató és a pótkocsi rendszáma"
+                  required placeholder="pl: aaa-123 bbb-123 vagy aaaa-123 bbbb-123">
+              </div>
+              <br>
+              <center>
+                <button type="submit" class="lejelentes btn btn-primary" name="button" value="clickeee">Konténer lejelentése</button>
+              </center>
+            </form>
+            <!--<div class="loader"></div>-->
+            <!--<div class="loader-icont">
+              <img src="../static/assets/Icont logo-animacio---150.gif" width="20px">
+            </div>-->
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ez még az előző fajta: körkörös loading gif, amig várjuk, hogy betöltödjön az sikeres elküldés odal.
+  <script>
+    lejelentes_btn = document.querySelector(".lejelentes");
+    lejelentes_btn.onclick = function () {
+      this.innerHTML = "<center>Lejelenetés folyamatban... <div class='loader'></div></center>";
+      setTimeout(() => {
+        this.innerHTML = "Konténer lejelentése ";
+        this.style = "background: #3A833A; color: #333, pointer-events: none";
+      }, 30000);
+    }  
+  </script>-->
+
+  <!-- Ez már az ICONT loading gif, amig várjuk, hogy betöltödjön az sikeres elküldés odal.-->
+  <script>
+    lejelentes_btn = document.querySelector(".lejelentes");
+    lejelentes_btn.onclick = function () {
+      this.innerHTML = "<center>Lejelenetés folyamatban... <div class='loader_icont'><img src='../static/assets/Icont logo-animacio---150.gif' width='70px'></div></center>";
+      setTimeout(() => {
+        this.innerHTML = "Konténer lejelentése ";
+        this.style = "background: #20809d; color: #333, pointer-events: none";
+      }, 30000);
+    }  
+  </script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

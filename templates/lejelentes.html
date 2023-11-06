@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <link rel="icon" href="../static/assets/ICONT icon 2.ico">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <title>Sikeres lejeletés</title>
+</head>
+
+<body>
+    <div class="sikeres_lejelentes">
+        <div>
+            <h5>I-Cont Ref: <b>{{ icont_ref }}</b></h5>
+            <h5>Booking: <b>{{ booking }}</b></h5>
+            <h5>Konréner: <b>{{ cont }}</b></h5>
+            <h5>Zár: <b>{{ seal }}</b></h5>
+            <h5>Rendszám: <b>{{ truck_number }}</b></h5>
+            <hr>
+        </div>
+        <div>
+            </br>
+            <h3>Az alábbi e-mail lett elküldve a terminálra:</h3>
+            </br>
+        </div>
+        <div>
+            <h5 sytle=”font-family: ’Calibri’; font-size: 11; color: black;”>
+                Sziasztok,<br>
+                <br>
+                Kérlek jelentsétek le Bilken a konténert:<br>
+                <br>
+                konténer: <b>{{ cont }}</b><br>
+                zár: <b>{{ seal }}</b><br>
+                <br>
+                Köszönöm előre is,<br>
+                Tomi </h4><br>
+        </div>
+        <div>
+            <h5 sytle=”font-family: ’Arial’; font-size: 9; color: light-grey;”>
+                Üdvözlettel / Best regards:<br>
+                <b>Tamás Kele</b> </h4>
+        </div>
+        <img src='https://icontshipping.com/wp-content/uploads/2020/06/logo-2.png' ; width='100'><br>
+        <div><br>
+            <h7 sytle=”font-family: ’Arial’; font-size: 9; color: grey;”>
+                <b>I-CONT Freight Forwarding S.R.L.</b><br>
+                300671-Timisoara-Calea Circumvalatiunii 22.<br>
+                <br>
+                Mobil:<b>+36 70 779 09 21</b><br>
+                E-mail: tomi@i-cont.eu<br>
+                Web: http://www.i-cont.eu </h5><br>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

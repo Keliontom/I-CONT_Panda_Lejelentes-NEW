@@ -1,0 +1,114 @@
+body {
+  color: rgba(35, 34, 34, 0);
+}
+
+.btn:active {
+  background-color: blueviolet;
+}
+
+/*.btn:focus {
+  background-color: blueviolet;
+}
+
+.btn-primary:focus {
+  background-color: blueviolet;
+}
+
+.btn-primary:active {
+  background-color: blueviolet;
+}*/
+
+.fullscreen {
+  height: 100vh;
+  position: relative;
+  margin: 0px;
+  color: antiquewhite;
+}
+
+video {
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -2000;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1000;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.content {
+  margin-top: 0px;
+  margin-left: 0px;
+  z-index: 4;
+}
+
+.form-control {
+  background-color: transparent;
+  color: white;
+}
+
+.sikeres_lejelentes {
+  color: rgb(32, 31, 31);
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.lejelenetes {
+  font-size: 22px 
+  color: #fff;
+  background: #29ca8e;
+  width: 250px;
+  height: 60px;
+  cursor: pointer;
+  border-radius: 3px;
+  box-shadow: 0 8рх 5px -5px rgba(0, 0, 0, 0.2);
+  display: grid;
+  place-content: center;
+}
+
+.loader {
+  pointer-events: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #fff;
+  animation: an1 1s ease infinite;
+  place-content: center;
+}
+
+@keyframes an1 {
+  0% {
+    transform: rotate(0turn);
+  }
+
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+.loader_icont {
+  pointer-events: none;
+  place-content: center;
+}
+
+div#content {
+  display: none;
+}
+
+div#loading {
+  top: 200 px;
+  margin: auto;
+  position: absolute;
+  z-index: 1000;
+  width: 160px;
+  height: 24px;
+  background: url(loadingimage.gif) no-repeat;
+  cursor: wait;
+}
