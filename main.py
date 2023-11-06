@@ -23,10 +23,10 @@ app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 #app.config['MAIL_DEBAG'] = True
-app.config['MAIL_USERNAME'] = 'tomi@i-cont.eu'
+app.config['MAIL_USERNAME'] = 'lejelentes@i-cont.eu'
 app.config['MAIL_PASSWORD'] = os.getenv('PASS')
 
-app.config['MAIL_DEFAULT_SENDER'] = ('Tomi I-CONT','tomi@i-cont.eu')
+app.config['MAIL_DEFAULT_SENDER'] = ('Tomi I-CONT','lejelentes@i-cont.eu')
 app.config['MAIL_SMAX_EMAILS'] = 2
 #app.config['MAIL_SUPRESS_SEND'] = False
 app.config['MAIL_ASCII_ATTACHMENTS'] = False
