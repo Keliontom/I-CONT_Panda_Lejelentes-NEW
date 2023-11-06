@@ -87,11 +87,54 @@ def receive_data():
 
     #msg.body = "Kerlek jelentsetek le Bilken az alabbi kontenert:"
     #<h5 style=”font-family: ’Calibri’; font-size:11; color:black;”>
-    msg.html = panda_letter(CONT,SEAL)
 
+    #ez a jó üztenet , de ezzel nem megy, ezért visszatérek egy korábbi verzióhoz.
+    #msg.html = panda_letter(CONT,SEAL)
+    msg.html = f"""
+    <div class="col-4 col-sm-3 col-md-5"> 
+        <div>
+            Sziasztok,<br>
+            <br>
+            Kérlek jelentsétek le Bilken az alábbi konténert:<br>
+            <br>
+            konténer: <b>{cont}</b><br>
+            zár: <b>{seal}</b><br>
+            <br>
+            Köszönöm előre is,<br>
+            Tomi <br>
+            <br>
+        </div>
+        <div>
+            Üdvözlettel / Best regards:<br>
+            Tamás Kele</h4><br>
+            <br>
+            <img src='https://icontshipping.com/wp-content/uploads/2020/06/logo-2.png'; width='100'><br>
+        </div>
+        <div>
+            <b>I-CONT Freight Forwarding S.R.L.</b><br>
+            300671-Timisoara-Calea Circumvalatiunii 22.<br>
+            <br>
+            Mobil: <b>+36 70 779 0921</b><br>
+            E-mail: tomi@i-cont.eu<br>
+            Web: http://www.i-cont.eu </h5><br>
+        </div>
+    </div>"""
     mail.send(msg)
 
-    return render_template('lejelentes.html', icont_ref=icont_ref, booking=booking, cont=CONT, seal=SEAL, truck_number=truck_number)
+    return f"""Booking: <b>{booking}</b>
+                </br>
+                Konténer: <b>{cont}</b>
+                </br>
+                Zár: <b>{seal}</b>
+                </br>
+                Rendszám: <b>{truck_number}</b>
+                </br>
+                </br>
+                </br>
+                <h3>Az alábbi e-mail lett elküldve a terminálra:</h3>
+                {msg.html}"""
+    
+    #return render_template('lejelentes.html', icont_ref=icont_ref, booking=booking, cont=CONT, seal=SEAL, truck_number=truck_number)
 
 def googlesheet_kitoltes(icont_ref, booking, cont,seal, truck_number):
     googletabla = Icont_sheet()
